@@ -1,0 +1,38 @@
+{
+    "name": "josegonzalez/cakephp-error-handlers",
+    "description": "CakePHP plugin that includes wrappers for popular error handling services",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "error", "exception"],
+    "homepage": "https://github.com/josegonzalez/cakephp-error-handlers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Diaz-Gonzalez",
+            "email": "cakephp+error-handlers@josediazgonzalez.com"
+        }
+    ],
+    "require": {
+        "cakephp/cakephp": "~3.0",
+        "php": ">=5.4",
+        "bugsnag/bugsnag": "2.*",
+        "airbrake/phpbrake": "^0.0.11",
+        "mindscape/raygun4php": "^1.6",
+        "raven/raven": "^0.13.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*",
+        "cakephp/cakephp-codesniffer": "dev-master",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Josegonzalez\\ErrorHandlers\\": "src",
+            "Josegonzalez\\ErrorHandlers\\Test\\Fixture\\": "tests\\Fixture"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Josegonzalez\\ErrorHandlers\\Test\\": "tests"
+        }
+    }
+}
