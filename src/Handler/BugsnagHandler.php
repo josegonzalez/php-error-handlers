@@ -2,15 +2,10 @@
 namespace Josegonzalez\ErrorHandlers\Handler;
 
 use Bugsnag_Client;
-use Cake\Utility\Hash;
+use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 
-class BugsnagHandler implements HandlerInterface
+class BugsnagHandler extends AbstractHandler implements HandlerInterface
 {
-    public function __construct(array $config = array())
-    {
-        $this->apiKey = Hash::get($config, 'apiKey');
-    }
-
     public function handle($exception)
     {
         $client = $this->client();
@@ -21,11 +16,12 @@ class BugsnagHandler implements HandlerInterface
 
     protected function client()
     {
-        if (!$this->apiKey) {
+        $apiKey = $this->config('apiKey');
+        if (!$apiKey) {
             return null;
         }
 
-        $client = new Bugsnag_Client($this->apiKey);
+        $client = new Bugsnag_Client($apiKey);
         return $client;
     }
 }

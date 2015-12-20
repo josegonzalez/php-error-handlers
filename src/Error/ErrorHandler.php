@@ -30,7 +30,7 @@ class ErrorHandler extends CoreErrorHandler
             $config = [];
         }
 
-        $client = new $handlerClass($config);
+        $client = new $handlerClass((array)$config);
         return $client->handle($exception);
     }
 }

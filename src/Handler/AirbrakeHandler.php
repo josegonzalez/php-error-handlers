@@ -2,16 +2,10 @@
 namespace Josegonzalez\ErrorHandlers\Handler;
 
 use Airbrake\Notifier;
-use Cake\Utility\Hash;
+use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 
-class AirbrakeHandler implements HandlerInterface
+class AirbrakeHandler extends AbstractHandler implements HandlerInterface
 {
-    public function __construct(array $config = array())
-    {
-        $this->projectId = Hash::get($config, 'projectId');
-        $this->projectKey = Hash::get($config, 'projectKey');
-    }
-
     public function handle($exception)
     {
         $client = $this->client();
@@ -22,16 +16,15 @@ class AirbrakeHandler implements HandlerInterface
 
     protected function client()
     {
-        if (!$this->projectId) {
-            return null;
-        }
-        if (!$this->projectKey) {
+        $projectId = $this->config('projectId');
+        $projectKey = $this->config('projectKey');
+        if (!$projectId || !$projectKey) {
             return null;
         }
 
         $config = [
-            'projectId' => $this->projectId,
-            'projectKey' => $this->projectKey,
+            'projectId' => $projectId,
+            'projectKey' => $projectKey,
         ];
         $client = new Notifier($config);
         return $client;

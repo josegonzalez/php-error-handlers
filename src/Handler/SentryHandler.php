@@ -1,16 +1,11 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Handler;
 
-use Cake\Utility\Hash;
+use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 use Raven_Client;
 
-class SentryHandler implements HandlerInterface
+class SentryHandler extends AbstractHandler implements HandlerInterface
 {
-    public function __construct(array $config = array())
-    {
-        $this->dsn = Hash::get($config, 'dsn');
-    }
-
     public function handle($exception)
     {
         $client = $this->client();
@@ -21,11 +16,12 @@ class SentryHandler implements HandlerInterface
 
     protected function client()
     {
-        if (!$this->dsn) {
+        $dsn = $this->config('dsn');
+        if (!$dsn) {
             return null;
         }
 
-        $client = new Raven_Client($this->apiKey);
+        $client = new Raven_Client($dsn);
         return $client;
     }
 }

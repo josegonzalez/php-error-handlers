@@ -1,10 +1,9 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Handler;
 
-use Cake\Core\Configure;
-use Exception;
+use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 
-class NewrelicHandler implements HandlerInterface
+class NewrelicHandler extends AbstractHandler implements HandlerInterface
 {
     public function handle($exception)
     {

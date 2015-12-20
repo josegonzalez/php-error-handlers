@@ -1,16 +1,11 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Handler;
 
-use Cake\Utility\Hash;
+use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 use Raygun4php\RaygunClient;
 
-class RaygunHandler implements HandlerInterface
+class RaygunHandler extends AbstractHandler implements HandlerInterface
 {
-    public function __construct(array $config = array())
-    {
-        $this->apiKey = Hash::get($config, 'apiKey');
-    }
-
     public function handle($exception)
     {
         $client = $this->client();
@@ -21,11 +16,12 @@ class RaygunHandler implements HandlerInterface
 
     protected function client()
     {
-        if (!$this->apiKey) {
+        $apiKey = $this->config('apiKey');
+        if (!$apiKey) {
             return null;
         }
 
-        $client = new RaygunClient($this->apiKey);
+        $client = new RaygunClient($apiKey);
         return $client;
     }
 }
