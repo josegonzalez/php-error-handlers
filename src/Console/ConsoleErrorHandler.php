@@ -1,5 +1,5 @@
 <?php
-namespace Josegonzalez\Console;
+namespace Josegonzalez\ErrorHandlers\Console;
 
 use Cake\Console\ConsoleErrorHandler as CoreConsoleErrorHandler;
 

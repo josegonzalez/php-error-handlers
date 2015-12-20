@@ -1,5 +1,5 @@
 <?php
-namespace Josegonzalez\Error;
+namespace Josegonzalez\ErrorHandlers\Error;
 
 use Cake\Error\ErrorHandler as CoreErrorHandler;
 
