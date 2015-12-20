@@ -27,7 +27,7 @@ bin/cake plugin load Josegonzalez/ErrorHandlers
 
 ## Usage
 
-You will want to setup at least the following configuration keys:
+You will want to setup at least the following configuration keys in your `config/app.php`:
 
 - `Error.handlerClass`: The fully qualified namespace of a handler class. They are currently as follows:
     - `\Josegonzalez\ErrorHandlers\Handler\AirbrakeHandler`
@@ -37,9 +37,22 @@ You will want to setup at least the following configuration keys:
     - `\Josegonzalez\ErrorHandlers\Handler\SentryHandler`
 - `Error.handlerConfig`: An array of configuration data for each service
 
+### `Error.handlerConfig`
+
+The following options exist for each handler:
+
+- `AirbrakeHandler`:
+    - `projectId`
+    - `projectKey`
+- `BugsnagHandler`:
+    - `apiKey`
+- `RaygunHandler`:
+    - `apiKey`
+- `SentryHandler`:
+    - `dsn`
+
 ## TODO
 
-- Document `Error.handlerConfig`
 - Add the ability to add extra data
 - Extra data filtering
 - Add the ability to "mute" exceptions
