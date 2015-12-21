@@ -110,6 +110,10 @@ if ($isCli) {
 }
 ```
 
+## Running Tests
+
+Yup, the tests require CakePHP. Pull requests welcome!
+
 ## License
 
 The MIT License (MIT)
