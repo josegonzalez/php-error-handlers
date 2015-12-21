@@ -40,6 +40,11 @@ class MonologStreamHandler extends AbstractHandler implements HandlerInterface
         }
     }
 
+    /**
+     * Returns a client
+     *
+     * @return \Monolog\Logger
+     */
     protected function client()
     {
         $handlerClass = $this->config('handlerClass');
