@@ -61,21 +61,22 @@ The registered handler returns false by default. This allows you to chain error 
 
 The following are built-in handlers with their configuration options:
 
-- `AirbrakeHandler`:
-    - `projectId`
-    - `projectKey`
-- `BugsnagHandler`:
-    - `apiKey`
-- `MonologStreamHandler`:
-    - `name`
-    - `handlerClass`
-    - `stream`
-    - `level`
-- `NewrelicHandler`
-- `RaygunHandler`:
-    - `apiKey`
-- `SentryHandler`:
-    - `dsn`
+- `AirbrakeHandler`:: Uses the official [airbrake php](https://github.com/airbrake/phpbrake/) package.
+    - `host`: (optional | default: `api.airbrake.io`)
+    - `projectId`: (required | default: `null`)
+    - `projectKey`: (required | default: `null`)
+- `BugsnagHandler`: Uses the official [bugsnag php](https://github.com/bugsnag/bugsnag-php) package.
+    - `apiKey`: (required | default: `null`)
+- `MonologStreamHandler`: Uses the [monolog StreamHandler](https://github.com/seldaek/monolog).
+    - `name`: (optional | default: `error`)
+    - `handlerClass`: (optional | default: `Monolog\Handler\StreamHandler`)
+    - `stream`: (optional | default: `log/error.log`)
+    - `level`: (optional | default: `Monolog\Logger::Warning`)
+- `NewrelicHandler`: Uses the `newrelic` [php extension](https://docs.newrelic.com/docs/agents/php-agent/getting-started/new-relic-php).
+- `RaygunHandler`: Uses the official [raygun php](https://github.com/MindscapeHQ/raygun4php) package.
+    - `apiKey`: (required | default: `null`)
+- `SentryHandler`: Uses the official [sentry raven php](https://github.com/getsentry/raven-php) package.
+    - `dsn`: (required | default: `null`)
 
 ### Custom Handlers
 
