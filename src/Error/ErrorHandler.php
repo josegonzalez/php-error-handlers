@@ -20,17 +20,16 @@ class ErrorHandler extends CoreErrorHandler
 
     public function handle($exception)
     {
-        $handlerClass = Configure::read('Error.handlerClass');
-        if (!class_exists($handlerClass)) {
-            return;
+        $handlers = (array)Configure::read('Error.config.handlers');
+        foreach ($handlers as $handler => $config) {
+            if (!class_exists($handler)) {
+                $handler = 'Josegonzalez\ErrorHandlers\Handler\\' . $handler;
+            }
+            if (!class_exists($handler)) {
+                continue;
+            }
+            $instance = new $handler((array)$config);
+            $instance->handle($exception);
         }
-
-        $config = Configure::read('Error.handlerConfig');
-        if (empty($config)) {
-            $config = [];
-        }
-
-        $client = new $handlerClass((array)$config);
-        return $client->handle($exception);
     }
 }
