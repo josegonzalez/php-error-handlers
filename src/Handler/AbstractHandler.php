@@ -23,5 +23,11 @@ abstract class AbstractHandler
     public function __construct(array $config = [])
     {
         $this->config($config);
+        $this->configDefault('clientCallback', function ($client) {
+            return $client;
+        });
+        $this->configDefault('exceptionCallback', function ($exception) {
+            return $exception;
+        });
     }
 }

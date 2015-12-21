@@ -14,7 +14,12 @@ class RaygunHandler extends AbstractHandler implements HandlerInterface
      */
     public function handle($exception)
     {
+        $exception = call_user_func($this->config('exceptionCallback'), $exception);
+        if (!$exception) {
+            return;
+        }
         $client = $this->client();
+        $client = call_user_func($this->config('clientCallback'), $client);
         if ($client) {
             $client->SendException($exception);
         }

@@ -78,6 +78,50 @@ The following are built-in handlers with their configuration options:
 - `SentryHandler`: Uses the official [sentry raven php](https://github.com/getsentry/raven-php) package.
     - `dsn`: (required | default: `null`)
 
+### Handler and Exception Modification
+
+#### Modifying the client handler
+
+Sometimes you may find it useful to modify the client. For instance, it may be necessary to add contextual information to the given client call. To do so, you can set the `clientCallback` configuration key:
+
+```php
+$config = [
+    'BugsnagHandler' => [
+        'clientCallback' => function ($client) {
+            // do something interesting to the client
+            $client->setAppVersion('1.0.0');
+            return $client;
+        },
+    ],
+];
+```
+
+Note that the client should still respond to the existing reporting API provided by the upstream library. You may respond with a proxy library if desired, though returning the initial client is ideal.
+
+> `$client` may be set to `null` inside of `clientCallback` if the handler is improperly configured.
+
+#### Modifying the exception
+
+If necessary, it is possible to modify the exception being used within a particular handler. Changes to the exception will persist only for the duration of that particular handler call.
+
+To do so, set the `exceptionCallback` configuration key for a particular handler:
+
+```php
+$config = [
+    'BugsnagHandler' => [
+        'exceptionCallback' => function ($exception) {
+            // return null to skip reporting errors
+            if ($exception instanceof \Error) {
+                return null;
+            }
+            return $exception;
+        },
+    ],
+];
+```
+
+You may return another exception or `null`. In the latter case, the built-in handlers will skip reporting the given exception.
+
 ### Custom Handlers
 
 Each handler should implement the `Josegonzalez\ErrorHandlers\Handler\HandlerInterface`. This interface contains a single method:

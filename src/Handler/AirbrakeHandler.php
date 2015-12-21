@@ -14,7 +14,12 @@ class AirbrakeHandler extends AbstractHandler implements HandlerInterface
      */
     public function handle($exception)
     {
+        $exception = call_user_func($this->config('exceptionCallback'), $exception);
+        if (!$exception) {
+            return;
+        }
         $client = $this->client();
+        $client = call_user_func($this->config('clientCallback'), $client);
         if ($client) {
             $client->notify($exception);
         }
@@ -33,10 +38,7 @@ class AirbrakeHandler extends AbstractHandler implements HandlerInterface
             return null;
         }
 
-        $config = [
-            'projectId' => $projectId,
-            'projectKey' => $projectKey,
-        ];
+        $config = $this->config();
         $client = new Notifier($config);
         return $client;
     }

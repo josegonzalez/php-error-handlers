@@ -13,6 +13,10 @@ class NewrelicHandler extends AbstractHandler implements HandlerInterface
      */
     public function handle($exception)
     {
+        $exception = call_user_func($this->config('exceptionCallback'), $exception);
+        if (!$exception) {
+            return;
+        }
         if (extension_loaded('newrelic')) {
             newrelic_notice_error($exception);
         }

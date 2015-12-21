@@ -19,13 +19,6 @@ class MonologStreamHandler extends AbstractHandler implements HandlerInterface
         $this->configDefault('handlerClass', 'Monolog\Handler\StreamHandler');
         $this->configDefault('stream', 'log/error.log');
         $this->configDefault('level', Logger::WARNING);
-
-        $handlerClass = $this->config('handlerClass');
-        $level = $this->config('level');
-        $stream = $this->config('stream');
-
-        $this->log = new Logger($this->config('name'));
-        $this->log->pushHandler(new $handlerClass($stream, $level));
     }
 
     /**
@@ -36,6 +29,24 @@ class MonologStreamHandler extends AbstractHandler implements HandlerInterface
      */
     public function handle($exception)
     {
-        $this->log->addError(sprintf('%s: %s', get_class($exception), $exception->getMessage()));
+        $exception = call_user_func($this->config('exceptionCallback'), $exception);
+        if (!$exception) {
+            return;
+        }
+        $client = $this->client();
+        $client = call_user_func($this->config('clientCallback'), $client);
+        if ($client) {
+            $client->addError(sprintf('%s: %s', get_class($exception), $exception->getMessage()));
+        }
+    }
+
+    protected function client()
+    {
+        $handlerClass = $this->config('handlerClass');
+        $level = $this->config('level');
+        $stream = $this->config('stream');
+        $log = new Logger($this->config('name'));
+        $log->pushHandler(new $handlerClass($stream, $level));
+        return $log;
     }
 }
