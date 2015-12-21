@@ -17,7 +17,7 @@ $config = [
 ];
 
 // Register the error handler
-(new \Josegonzalez\ErrorHandlers\Error\Handler($config))->register();
+(new \Josegonzalez\ErrorHandlers\Handler($config))->register();
 
 // Enjoy throwing exceptions and reporting them upstream
 throw new \Exception('Test Exception');

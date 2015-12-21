@@ -1,5 +1,5 @@
 <?php
-namespace Josegonzalez\ErrorHandlers\Error;
+namespace Josegonzalez\ErrorHandlers;
 
 use Error;
 use ErrorException;
@@ -12,6 +12,11 @@ class Handler
 {
     use ConfigTrait;
 
+    /**
+     * Constructor
+     *
+     * @param array $config The configuration for error handling.
+     */
     public function __construct(array $config = [])
     {
         $this->config($config);
@@ -19,6 +24,11 @@ class Handler
         $this->configDefault('handlers', []);
     }
 
+    /**
+     * Register the error and exception handlers.
+     *
+     * @return void
+     */
     public function register()
     {
         $errorLevel = $this->config('errorLevel');
@@ -49,12 +59,31 @@ class Handler
         });
     }
 
+    /**
+     * Handle a fatal error.
+     *
+     * @param int $code Code of error
+     * @param string $description Error description
+     * @param string $file File on which error occurred
+     * @param int $line Line that triggered the error
+     * @return bool
+     */
     public function handleFatalError($code, $description, $file = null, $line = null)
     {
         $exception = new FatalErrorException($description, $code, $file, $line);
         return $this->handle($exception);
     }
 
+    /**
+     * Set as the default error handler
+     *
+     * @param int $code Code of error
+     * @param string $description Error description
+     * @param string|null $file File on which error occurred
+     * @param int|null $line Line that triggered the error
+     * @param array|null $context Context
+     * @return bool True if error was handled
+     */
     public function handleError($code, $description, $file = null, $line = null, $context = null)
     {
         $context;
@@ -62,6 +91,17 @@ class Handler
         return $this->handle($exception);
     }
 
+    /**
+     * Handle uncaught exceptions.
+     *
+     * Uses a template method provided by subclasses to display errors in an
+     * environment appropriate way.
+     *
+     * @param \Exception $exception Exception instance.
+     * @return void
+     * @throws \Exception When renderer class not found
+     * @see http://php.net/manual/en/function.set-exception-handler.php
+     */
     public function handleException($exception)
     {
         if ($exception instanceof Error) {
@@ -71,6 +111,15 @@ class Handler
         return $this->handle($exception);
     }
 
+    /**
+     * Handle uncaught exceptions.
+     *
+     * Iterates over the configured error handlers and invokes them in order
+     *
+     * @param Throwable|Exception $exception A Throwable or Exception instance
+     * @return void
+     * @see http://php.net/manual/en/function.set-exception-handler.php
+     */
     public function handle(Exception $exception)
     {
         $handlers = (array)$this->config('handlers');
