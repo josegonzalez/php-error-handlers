@@ -110,13 +110,6 @@ if ($isCli) {
 }
 ```
 
-## TODO
-
-- Add the ability to add extra data
-- Extra data filtering
-- Add the ability to "mute" exceptions
-- Use an external set of libraries for exception services
-
 ## License
 
 The MIT License (MIT)
