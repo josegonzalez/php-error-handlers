@@ -12,7 +12,7 @@
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
-        <testsuite name="Version Test Suite">
+        <testsuite name="Test Suite">
             <directory>./tests/TestCase</directory>
         </testsuite>
     </testsuites>
