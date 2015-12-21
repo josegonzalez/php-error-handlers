@@ -1,8 +1,8 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Error;
 
-use ErrorException;
 use Error;
+use ErrorException;
 use Exception;
 use Josegonzalez\ErrorHandlers\Exception\FatalErrorException;
 use Josegonzalez\ErrorHandlers\Exception\PHP7ErrorException;

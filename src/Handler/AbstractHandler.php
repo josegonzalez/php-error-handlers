@@ -14,7 +14,7 @@ abstract class AbstractHandler
      */
     protected $config = [];
 
-    public function __construct(array $config = array())
+    public function __construct(array $config = [])
     {
         $this->config($config);
     }

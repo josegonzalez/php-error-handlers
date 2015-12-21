@@ -1,8 +1,8 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Handler;
 
-use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class MonologStreamHandler extends AbstractHandler implements HandlerInterface
 {
