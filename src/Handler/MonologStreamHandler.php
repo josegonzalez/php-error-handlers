@@ -6,6 +6,12 @@ use Monolog\Logger;
 
 class MonologStreamHandler extends AbstractHandler implements HandlerInterface
 {
+    /**
+     * Constructs and configures an error log stream handler
+     *
+     * @param array $config An array of configuration data
+     * @return void
+     */
     public function __construct(array $config = [])
     {
         parent::__construct($config);
@@ -22,6 +28,12 @@ class MonologStreamHandler extends AbstractHandler implements HandlerInterface
         $this->log->pushHandler(new $handlerClass($stream, $level));
     }
 
+    /**
+     * Handles a given exception
+     *
+     * @param Throwable|Exception $exception A Throwable or Exception instance
+     * @return void
+     */
     public function handle($exception)
     {
         $this->log->addError(sprintf('%s: %s', get_class($exception), $exception->getMessage()));

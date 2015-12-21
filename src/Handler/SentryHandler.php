@@ -6,6 +6,12 @@ use Raven_Client;
 
 class SentryHandler extends AbstractHandler implements HandlerInterface
 {
+    /**
+     * Handles a given exception
+     *
+     * @param Throwable|Exception $exception A Throwable or Exception instance
+     * @return void
+     */
     public function handle($exception)
     {
         $client = $this->client();
@@ -14,6 +20,11 @@ class SentryHandler extends AbstractHandler implements HandlerInterface
         }
     }
 
+    /**
+     * Returns a client
+     *
+     * @return \Raven_Client
+     */
     protected function client()
     {
         $dsn = $this->config('dsn');

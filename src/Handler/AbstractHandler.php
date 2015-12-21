@@ -14,6 +14,12 @@ abstract class AbstractHandler
      */
     protected $config = [];
 
+    /**
+     * Constructs and configures a handler
+     *
+     * @param array $config An array of configuration data
+     * @return void
+     */
     public function __construct(array $config = [])
     {
         $this->config($config);
