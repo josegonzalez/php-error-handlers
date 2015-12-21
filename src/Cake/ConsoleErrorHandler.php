@@ -1,9 +1,9 @@
 <?php
-namespace Josegonzalez\ErrorHandlers\Error;
+namespace Josegonzalez\ErrorHandlers\Cake;
 
-use Cake\Error\ErrorHandler as CoreErrorHandler;
+use Cake\Console\ConsoleErrorHandler as CoreConsoleErrorHandler;
 
-class ErrorHandler extends CoreErrorHandler
+class ConsoleErrorHandler extends CoreConsoleErrorHandler
 {
     /**
      * Set as the default error handler by CakePHP.

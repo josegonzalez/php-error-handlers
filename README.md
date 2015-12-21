@@ -86,11 +86,11 @@ public function handle($exception);
 ```
 
 - PHP 5.x errors will be replaced with wrapper `ErrorException` instances before sent to the `handle` method.
-- PHP 7.x errors extending `Throwable` will be replaced with wrapper `Josegonzalez\Error\Exception\PHP7ErrorException` instances before sent to the `handle` method.
-- PHP Fatal errors will be replaced with wrapper `Josegonzalez\Error\Exception\FatalErrorException` instances before sent to the `handle` method.
+- PHP 7.x errors extending `Throwable` will be replaced with wrapper `Josegonzalez\ErrorHandlers\Exception\PHP7ErrorException` instances before sent to the `handle` method.
+- PHP Fatal errors will be replaced with wrapper `Josegonzalez\ErrorHandlers\Exception\FatalErrorException` instances before sent to the `handle` method.
 - PHP Exceptions will be sent in, unmodified.
 
-Custom handlers *should* extend the provided `Josegonzalez\ErrorHandler\Handler\AbstractHandler` class. This gives them the ability to have configuration passed in via the provided `ConfigTrait` and custom `__construct()`.
+Custom handlers *should* extend the provided `Josegonzalez\ErrorHandlers\Handler\AbstractHandler` class. This gives them the ability to have configuration passed in via the provided `ConfigTrait` and custom `__construct()`.
 
 ### CakePHP Usage
 
@@ -104,9 +104,9 @@ Next, configure the provided ErrorHandler classes in your `config/bootstrap.php`
 // around line 100
 $isCli = PHP_SAPI === 'cli';
 if ($isCli) {
-    (new \Josegonzalez\ErrorHandlers\Console\ConsoleErrorHandler(Configure::read('Error')))->register();
+    (new \Josegonzalez\ErrorHandlers\Cake\ConsoleErrorHandler(Configure::read('Error')))->register();
 } else {
-    (new \Josegonzalez\ErrorHandlers\Error\ErrorHandler(Configure::read('Error')))->register();
+    (new \Josegonzalez\ErrorHandlers\Cake\ErrorHandler(Configure::read('Error')))->register();
 }
 ```
 
