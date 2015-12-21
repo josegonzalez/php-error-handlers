@@ -5,13 +5,14 @@
 [![Documentation Status](https://readthedocs.org/projects/cakephp-error-handlers/badge/?version=latest&style=flat-square)](https://readthedocs.org/projects/cakephp-error-handlers/?badge=latest)
 [![Gratipay](https://img.shields.io/gratipay/josegonzalez.svg?style=flat-square)](https://gratipay.com/~josegonzalez/)
 
-# CakePHP Error Handlers
+# Error Handlers
 
-A package that includes CakePHP wrappers for popular error handling services.
+A package that includes wrappers for popular error handling services.
+
+Includes an integration library for CakePHP 3.
 
 ## Requirements
 
-* CakePHP 3.x
 * PHP 5.4+
 * Patience
 
@@ -27,29 +28,87 @@ bin/cake plugin load Josegonzalez/ErrorHandlers
 
 ## Usage
 
-You will want to setup at least the following configuration keys in your `config/app.php`:
+You can register the `Handler` class as a handler of php errors and exceptions.
 
-- `Error.handlerClass`: The fully qualified namespace of a handler class. They are currently as follows:
-    - `\Josegonzalez\ErrorHandlers\Handler\AirbrakeHandler`
-    - `\Josegonzalez\ErrorHandlers\Handler\BugsnagHandler`
-    - `\Josegonzalez\ErrorHandlers\Handler\NewrelicHandler`
-    - `\Josegonzalez\ErrorHandlers\Handler\RaygunHandler`
-    - `\Josegonzalez\ErrorHandlers\Handler\SentryHandler`
-- `Error.handlerConfig`: An array of configuration data for each service
+```php
+// Create an array of configuration data to pass to the handler class
+$config = [
+    'handlers' => [
+        // *Can* be the class name, not-namespaced
+        // The namespace will be "interpolated" in such cases
+        'NewrelicHandler' => [
+        ],
+        // Can also include the full namespace
+        'Josegonzalez\ErrorHandlers\Handler\BugsnagHandler' => [
+            'apiKey' => 'YOUR_API_KEY_HERE'
+        ],
+        // Invalid handlers will be ignored
+        'InvalidHandler' => [
+        ],
+    ],
+];
 
-### `Error.handlerConfig`
+// Register the error handler
+(new \Josegonzalez\ErrorHandlers\Error\Handler($config))->register();
 
-The following options exist for each handler:
+// Enjoy throwing exceptions and reporting them upstream
+throw new \Exception('Test Exception');
+```
+
+The registered handler returns false by default. This allows you to chain error handlers such that this package can handle reporting while another library can display user-friendly error messages.
+
+### Available Handlers
+
+The following are built-in handlers with their configuration options:
 
 - `AirbrakeHandler`:
     - `projectId`
     - `projectKey`
 - `BugsnagHandler`:
     - `apiKey`
+- `MonologStreamHandler`:
+    - `name`
+    - `handlerClass`
+    - `stream`
+    - `level`
+- `NewrelicHandler`
 - `RaygunHandler`:
     - `apiKey`
 - `SentryHandler`:
     - `dsn`
+
+### Custom Handlers
+
+Each handler should implement the `Josegonzalez\ErrorHandlers\Handler\HandlerInterface`. This interface contains a single method:
+
+```php
+public function handle($exception);
+```
+
+- PHP 5.x errors will be replaced with wrapper `ErrorException` instances before sent to the `handle` method.
+- PHP 7.x errors extending `Throwable` will be replaced with wrapper `Josegonzalez\Error\Exception\PHP7ErrorException` instances before sent to the `handle` method.
+- PHP Fatal errors will be replaced with wrapper `Josegonzalez\Error\Exception\FatalErrorException` instances before sent to the `handle` method.
+- PHP Exceptions will be sent in, unmodified.
+
+Custom handlers *should* extend the provided `Josegonzalez\ErrorHandler\Handler\AbstractHandler` class. This gives them the ability to have configuration passed in via the provided `ConfigTrait` and custom `__construct()`.
+
+### CakePHP Usage
+
+You will want to setup at least the following configuration keys in your `config/app.php`:
+
+- `Error.config`: Takes the same configuration array as you would give for normal php usage.
+
+Next, configure the provided ErrorHandler classes in your `config/bootstrap.php`:
+
+```php
+// around line 100
+$isCli = PHP_SAPI === 'cli';
+if ($isCli) {
+    (new \Josegonzalez\ErrorHandlers\Console\ConsoleErrorHandler(Configure::read('Error')))->register();
+} else {
+    (new \Josegonzalez\ErrorHandlers\Error\ErrorHandler(Configure::read('Error')))->register();
+}
+```
 
 ## TODO
 

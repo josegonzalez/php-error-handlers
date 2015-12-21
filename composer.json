@@ -1,14 +1,13 @@
 {
-    "name": "josegonzalez/cakephp-error-handlers",
-    "description": "CakePHP plugin that includes wrappers for popular error handling services",
-    "type": "cakephp-plugin",
+    "name": "josegonzalez/php-error-handlers",
+    "description": "PHP Library includes wrappers for popular error handling services",
     "keywords": ["cakephp", "error", "exception"],
-    "homepage": "https://github.com/josegonzalez/cakephp-error-handlers",
+    "homepage": "https://github.com/josegonzalez/php-error-handlers",
     "license": "MIT",
     "authors": [
         {
             "name": "Jose Diaz-Gonzalez",
-            "email": "cakephp+error-handlers@josediazgonzalez.com"
+            "email": "php+error-handlers@josediazgonzalez.com"
         }
     ],
     "require": {
