@@ -1,6 +1,6 @@
 {
     "name": "josegonzalez/php-error-handlers",
-    "description": "PHP Library includes wrappers for popular error handling services",
+    "description": "PHP Library that includes wrappers for popular error handling services",
     "keywords": ["cakephp", "error", "exception"],
     "homepage": "https://github.com/josegonzalez/php-error-handlers",
     "license": "MIT",
