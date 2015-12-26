@@ -86,12 +86,14 @@ Sometimes you may find it useful to modify the client. For instance, it may be n
 
 ```php
 $config = [
-    'BugsnagHandler' => [
-        'clientCallback' => function ($client) {
-            // do something interesting to the client
-            $client->setAppVersion('1.0.0');
-            return $client;
-        },
+    'handlers' => [
+        'BugsnagHandler' => [
+            'clientCallback' => function ($client) {
+                // do something interesting to the client
+                $client->setAppVersion('1.0.0');
+                return $client;
+            },
+        ],
     ],
 ];
 ```
@@ -108,14 +110,16 @@ To do so, set the `exceptionCallback` configuration key for a particular handler
 
 ```php
 $config = [
-    'BugsnagHandler' => [
-        'exceptionCallback' => function ($exception) {
-            // return null to skip reporting errors
-            if ($exception instanceof \Error) {
-                return null;
-            }
-            return $exception;
-        },
+    'handlers' => [
+        'BugsnagHandler' => [
+            'exceptionCallback' => function ($exception) {
+                // return null to skip reporting errors
+                if ($exception instanceof \Error) {
+                    return null;
+                }
+                return $exception;
+            },
+        ],
     ],
 ];
 ```
