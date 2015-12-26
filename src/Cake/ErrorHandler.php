@@ -2,6 +2,8 @@
 namespace Josegonzalez\ErrorHandlers\Cake;
 
 use Cake\Error\ErrorHandler as CoreErrorHandler;
+use Cake\Core\Configure;
+use ErrorException;
 
 class ErrorHandler extends CoreErrorHandler
 {
