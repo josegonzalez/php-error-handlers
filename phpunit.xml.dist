@@ -23,6 +23,12 @@
             <directory suffix=".php">./vendor</directory>
             <file>./tests/bootstrap.php</file>
         </blacklist>
+        <!-- this is required, even if empty, until
+        https://github.com/sebastianbergmann/phpunit/issues/1872
+        is resolved -->
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
     </filter>
 
     <!-- Setup a listener for fixtures -->
