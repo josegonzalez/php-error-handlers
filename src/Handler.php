@@ -124,13 +124,17 @@ class Handler
     {
         $handlers = (array)$this->config('handlers');
         foreach ($handlers as $handler => $config) {
-            if (!class_exists($handler)) {
-                $handler = 'Josegonzalez\ErrorHandlers\Handler\\' . $handler;
+            $handlerClass = $handler;
+            if (!class_exists($handlerClass)) {
+                $handlerClass = 'Josegonzalez\ErrorHandlers\Handler\\' . $handler;
             }
-            if (!class_exists($handler)) {
+            if (!class_exists($handlerClass)) {
+                $handlerClass = 'Josegonzalez\ErrorHandlers\Handler\\' . $handler . 'Handler';
+            }
+            if (!class_exists($handlerClass)) {
                 continue;
             }
-            $instance = new $handler((array)$config);
+            $instance = new $handlerClass((array)$config);
             $instance->handle($exception);
         }
         return false;
