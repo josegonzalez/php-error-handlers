@@ -13,7 +13,7 @@ Includes an integration library for CakePHP 3.
 
 ## Requirements
 
-* PHP 5.4+
+* PHP 5.5+
 * Patience
 
 ## Installation
