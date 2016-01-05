@@ -1,8 +1,8 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Cake;
 
-use Cake\Error\ErrorHandler as CoreErrorHandler;
 use Cake\Core\Configure;
+use Cake\Error\ErrorHandler as CoreErrorHandler;
 use ErrorException;
 use Exception;
 
