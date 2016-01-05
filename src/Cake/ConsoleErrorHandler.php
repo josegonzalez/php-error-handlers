@@ -4,6 +4,7 @@ namespace Josegonzalez\ErrorHandlers\Cake;
 use Cake\Console\ConsoleErrorHandler as CoreConsoleErrorHandler;
 use Cake\Core\Configure;
 use ErrorException;
+use Exception;
 
 class ConsoleErrorHandler extends CoreConsoleErrorHandler
 {
