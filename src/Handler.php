@@ -120,7 +120,7 @@ class Handler
      * @return void
      * @see http://php.net/manual/en/function.set-exception-handler.php
      */
-    public function handle(Exception $exception)
+    public function handle($exception)
     {
         $handlers = (array)$this->config('handlers');
         foreach ($handlers as $handler => $config) {
