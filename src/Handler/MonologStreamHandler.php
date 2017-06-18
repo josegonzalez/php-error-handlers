@@ -52,6 +52,7 @@ class MonologStreamHandler extends AbstractHandler implements HandlerInterface
         $stream = $this->config('stream');
         $log = new Logger($this->config('name'));
         $log->pushHandler(new $handlerClass($stream, $level));
+
         return $log;
     }
 }

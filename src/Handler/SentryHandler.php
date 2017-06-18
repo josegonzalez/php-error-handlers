@@ -38,6 +38,11 @@ class SentryHandler extends AbstractHandler implements HandlerInterface
         }
 
         $client = new Raven_Client($dsn);
+        $callInstall = $this->config('callInstall');
+        if ($callInstall === true) {
+            $client->install();
+        }
+
         return $client;
     }
 }
