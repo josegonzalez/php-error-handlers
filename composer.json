@@ -13,7 +13,7 @@
     "require": {
         "cakephp/cakephp": "~3.0",
         "php": ">=7.0",
-        "bugsnag/bugsnag": "2.*",
+        "bugsnag/bugsnag": "~3.0",
         "airbrake/phpbrake": "^0.0.11",
         "mindscape/raygun4php": "^1.6",
         "sentry/sentry": "^1.7.0",
