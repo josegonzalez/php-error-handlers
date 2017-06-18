@@ -75,8 +75,9 @@ The following are built-in handlers with their configuration options:
 - `NewrelicHandler`: Uses the `newrelic` [php extension](https://docs.newrelic.com/docs/agents/php-agent/getting-started/new-relic-php).
 - `RaygunHandler`: Uses the official [raygun php](https://github.com/MindscapeHQ/raygun4php) package.
     - `apiKey`: (required | default: `null`)
-- `SentryHandler`: Uses the official [sentry raven php](https://github.com/getsentry/raven-php) package.
+- `SentryHandler`: Uses the official [sentry php](https://github.com/getsentry/sentry-php) package.
     - `dsn`: (required | default: `null`)
+    - `callInstall`: (optional | default: `false`) Whether or not to call the `install` method on the client.
 
 ### Handler and Exception Modification
 
