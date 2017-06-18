@@ -67,6 +67,8 @@ The following are built-in handlers with their configuration options:
     - `projectKey`: (required | default: `null`)
 - `BugsnagHandler`: Uses the official [bugsnag php](https://github.com/bugsnag/bugsnag-php) package.
     - `apiKey`: (required | default: `null`)
+    - `defaults`: (optional | default: `null`) Your bugsnag endpoint for enterprise users
+    - `endpoint`: (optional | default: `true`) If we should register our default callbacks
 - `MonologStreamHandler`: Uses the [monolog StreamHandler](https://github.com/seldaek/monolog).
     - `name`: (optional | default: `error`)
     - `handlerClass`: (optional | default: `Monolog\Handler\StreamHandler`)

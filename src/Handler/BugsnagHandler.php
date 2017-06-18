@@ -1,7 +1,7 @@
 <?php
 namespace Josegonzalez\ErrorHandlers\Handler;
 
-use Bugsnag_Client;
+use Bugsnag\Client;
 use Josegonzalez\ErrorHandlers\Handler\AbstractHandler;
 
 class BugsnagHandler extends AbstractHandler implements HandlerInterface
@@ -37,7 +37,12 @@ class BugsnagHandler extends AbstractHandler implements HandlerInterface
             return null;
         }
 
-        $client = new Bugsnag_Client($apiKey);
+        $endpoint = $this->config('endpoint');
+        $defaults = $this->config('defaults');
+        if ($defaults === null) {
+            $defaults = true;
+        }
+        $client = Client::make($apiKey, $endpoint, $defaults);
 
         return $client;
     }
