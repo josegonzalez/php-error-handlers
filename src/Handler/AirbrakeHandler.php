@@ -40,6 +40,7 @@ class AirbrakeHandler extends AbstractHandler implements HandlerInterface
 
         $config = $this->config();
         $client = new Notifier($config);
+
         return $client;
     }
 }

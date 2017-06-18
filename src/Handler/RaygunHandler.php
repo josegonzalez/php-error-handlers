@@ -38,6 +38,7 @@ class RaygunHandler extends AbstractHandler implements HandlerInterface
         }
 
         $client = new RaygunClient($apiKey);
+
         return $client;
     }
 }

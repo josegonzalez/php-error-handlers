@@ -22,6 +22,7 @@ class ErrorHandler extends CoreErrorHandler
     {
         $exception = new ErrorException($description, 0, $code, $file, $line);
         $this->handle($exception);
+
         return parent::handleError($code, $description, $file, $line, $context);
     }
 
@@ -36,6 +37,7 @@ class ErrorHandler extends CoreErrorHandler
     public function handleException(Exception $exception)
     {
         $this->handle($exception);
+
         return parent::handleException($exception);
     }
 

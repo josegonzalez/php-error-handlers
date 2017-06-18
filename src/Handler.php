@@ -71,6 +71,7 @@ class Handler
     public function handleFatalError($code, $description, $file = null, $line = null)
     {
         $exception = new FatalErrorException($description, $code, $file, $line);
+
         return $this->handle($exception);
     }
 
@@ -88,6 +89,7 @@ class Handler
     {
         $context;
         $exception = new ErrorException($description, 0, $code, $file, $line);
+
         return $this->handle($exception);
     }
 
@@ -137,6 +139,7 @@ class Handler
             $instance = new $handlerClass((array)$config);
             $instance->handle($exception);
         }
+
         return false;
     }
 }

@@ -38,6 +38,7 @@ class BugsnagHandler extends AbstractHandler implements HandlerInterface
         }
 
         $client = new Bugsnag_Client($apiKey);
+
         return $client;
     }
 }
