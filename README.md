@@ -64,6 +64,8 @@ The following are built-in handlers with their configuration options:
     - `environment`: (optional | default: `null`)
     - `rootDirectory`: (optional | default: `null`)
     - `httpClient`: (optional | default: `null`) which http client to use: "default", "curl", "guzzle" or a client instance
+- `AtatusHandler`: Uses the `atatus` [php extension](https://www.atatus.com/docs/platforms/php).
+    - `apiKey`: (optional | default: `null`)
 - `BugsnagHandler`: Uses the official [bugsnag php](https://github.com/bugsnag/bugsnag-php) package.
     - `apiKey`: (required | default: `null`)
     - `defaults`: (optional | default: `null`) Your bugsnag endpoint for enterprise users
