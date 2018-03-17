@@ -17,8 +17,13 @@ class AtatusHandler extends AbstractHandler implements HandlerInterface
         if (!$exception) {
             return;
         }
-        if (extension_loaded('atatus')) {
-            atatus_notify_exception($exception);
+        if (!extension_loaded('atatus')) {
+            return;
         }
+        $apiKey = $this->config('apiKey');
+        if (!empty($apiKey)) {
+            atatus_set_api_key($apiKey);
+        }
+        atatus_notify_exception($exception);
     }
 }
