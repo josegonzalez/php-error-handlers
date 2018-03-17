@@ -2,8 +2,6 @@
 [![Coverage Status](https://img.shields.io/coveralls/josegonzalez/php-error-handlers.svg?style=flat-square)](https://coveralls.io/r/josegonzalez/php-error-handlers?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/josegonzalez/php-error-handlers.svg?style=flat-square)](https://packagist.org/packages/josegonzalez/php-error-handlers)
 [![Latest Stable Version](https://img.shields.io/packagist/v/josegonzalez/php-error-handlers.svg?style=flat-square)](https://packagist.org/packages/josegonzalez/php-error-handlers)
-[![Documentation Status](https://readthedocs.org/projects/php-error-handlers/badge/?version=latest&style=flat-square)](https://readthedocs.org/projects/php-error-handlers/?badge=latest)
-[![Gratipay](https://img.shields.io/gratipay/josegonzalez.svg?style=flat-square)](https://gratipay.com/~josegonzalez/)
 
 # Error Handlers
 
