@@ -21,9 +21,6 @@ Includes an integration library for CakePHP 3.
 ```shell
 # install it
 composer require josegonzalez/php-error-handlers
-
-# load it
-bin/cake plugin load Josegonzalez/ErrorHandlers
 ```
 
 ## Usage
@@ -149,6 +146,8 @@ public function handle($exception);
 Custom handlers *should* extend the provided `Josegonzalez\ErrorHandlers\Handler\AbstractHandler` class. This gives them the ability to have configuration passed in via the provided `ConfigTrait` and custom `__construct()`.
 
 ### CakePHP Usage
+
+> Loading the library is not necessary and will result in errors. Please follow the below instructions for cakephp-specific configurations.
 
 You will want to setup at least the following configuration keys in your `config/app.php`:
 
