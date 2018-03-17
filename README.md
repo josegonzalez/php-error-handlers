@@ -162,7 +162,3 @@ if ($isCli) {
     (new \Josegonzalez\ErrorHandlers\Cake\ErrorHandler(Configure::read('Error')))->register();
 }
 ```
-
-## Running Tests
-
-Yup, the tests require CakePHP. Pull requests welcome!
